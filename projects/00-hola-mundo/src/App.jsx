@@ -1,6 +1,37 @@
 import { TwitterFollowCard } from "./TwitterFollowCard";
 import "./App.css";
 
+const users = [
+  {
+    uuid: 1,
+    userName: "lordVader",
+    name: "Lord DV-Sith",
+    isFollowing: true,
+    avatar: "darthvader",
+  },
+  {
+    uuid: 2,
+    userName: "pheralb",
+    name: "Pablo Hernandez",
+    isFollowing: false,
+    avatar: "pheralb",
+  },
+  {
+    uuid: 3,
+    userName: "midudev",
+    name: "Miguel Ángel Durán",
+    isFollowing: true,
+    avatar: "midudev",
+  },
+  {
+    uuid: 4,
+    userName: "lordVader2do",
+    name: "Lord DV-Sith 2do",
+    isFollowing: false,
+    avatar: "darthvader",
+  },
+];
+
 export function App() {
   const formatUser = (userName) => `@${userName}`;
 
@@ -11,12 +42,27 @@ export function App() {
     name: "Lord DV-Sith 2do",
   };
 
-  const propsCard2 = { isFollowing: true, userName: "lordVader" };
+  const propsCard2 = { initialIsFollowing: true, userName: "lordVader" };
 
   return (
     <section className="App">
-      <TwitterFollowCard
-        isFollowing
+      {
+        users.map((user) => {
+          const { userName, name, isFollowing, avatar } = user;
+          return (
+            <TwitterFollowCard
+              initialIsFollowing={isFollowing}
+              formatUserName={formatUser}
+              key={userName}
+              name={name}
+              userName={userName}
+              avatar={avatar}
+            >{name}</TwitterFollowCard>
+          );
+        })
+
+        /* <TwitterFollowCard
+        initialIsFollowing
         formatUserName={formatUser}
         name="Lord DV-Sith"
         userName="lordVader"
@@ -24,7 +70,7 @@ export function App() {
       ></TwitterFollowCard>
 
       <TwitterFollowCard
-        isFollowing={false}
+        initialIsFollowing={false}
         formatUserName={formatUser}
         name="Pablo Hernandez"
         userName="pheralb"
@@ -32,7 +78,7 @@ export function App() {
       ></TwitterFollowCard>
 
       <TwitterFollowCard
-        isFollowing
+        initialIsFollowing
         formatUserName={formatUser}
         name="Miguel Ángel Durán"
         userName="midudev"
@@ -43,7 +89,8 @@ export function App() {
         {...propsCard1} // se pasa objeto con propiedades que serán mapeadas al componente
         formatUserName={formatUser}
         avatar="darthvader"
-      ></TwitterFollowCard>
+      ></TwitterFollowCard> */
+      }
     </section>
   );
 }
